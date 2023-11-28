@@ -26,7 +26,7 @@ function App() {
     }, 1000);
   });
 
-  //keep track of the checkboxes checked
+  
   
 
   
