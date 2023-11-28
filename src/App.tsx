@@ -141,7 +141,7 @@ function Quiz2({setSlide, slide}: {setSlide: (slide: number) => void, slide: num
         display: 'flex',
         flexDirection: 'column',
       }}>
-        <img src='https://imgur.com/a/TCf4YYn'/>
+        <img src='https://i.imgur.com/6CDu8gz.png'/>
         <button onClick={() => {
           setSlide(slide + 1);
         }}>
