@@ -58,7 +58,11 @@ function App() {
       : slide === 3 ? <ShowMessageSlide slide={slide} setSlide={setSlide} message='Jag vet inte varför jag gör det här, jag har så tråååkiiiiiiigt'/>
       : slide === 4 ? <Quiz3 slide={slide} setSlide={setSlide} />
       : slide === 5 ? <Quiz4 setSlide={setSlide} />
-      : <TypeAnimation sequence={["Du klarade det, du har vunnit en resa till Paris!", 500, "Skojar bara, jag har gömt din present utanför din dörr i en Xtra påse", 500]} speed={50} cursor={false} wrapper="h1" repeat={0} style={{ fontSize: "2rem" }}/>
+      : <div>
+        <TypeAnimation sequence={["Du klarade det, du har vunnit en resa till Paris!", 500, "Skojar bara, jag har gömt din present utanför din dörr i en Xtra påse", 500]} speed={50} cursor={false} wrapper="h1" repeat={0} style={{ fontSize: "2rem" }}/>
+        <h2>Grattis i efterskott!</h2>
+        <img src="https://media.tenor.com/a45qtvT7kYgAAAAM/mati-birthday.gif"/>
+        </div>
       }
       <ToastContainer />
     </div>
