@@ -52,12 +52,12 @@ function App() {
           <h1>Redo? {timer}s</h1>
         </div>
       </div> 
-      : slide === 0 ? <Quiz1 setSlide={setSlide} /> 
+      : slide === 0 ? <Quiz1 slide={slide} setSlide={setSlide} /> 
       : slide === 1 ? <ShowMessageSlide slide={slide}setSlide={setSlide} message='Helt ärligt orkar jag inte programmera så att jag håller koll på vad du gissade. Men du tror väl inte att du seriöst kommer att få något av det?'/> 
-      : slide === 2 ? <Quiz2 setSlide={setSlide} />
-      : slide === 3 ? <ShowMessageSlide slide={slide} setSlide={setSlide} message='Jag vet inte varför jag gör det här, jag har så tråååkiiiiiiigt'/>
-      : slide === 4 ? <Quiz3 slide={slide} setSlide={setSlide} />
-      : slide === 5 ? <Quiz4 setSlide={setSlide} />
+      : slide === 2 ? <ShowMessageSlide slide={slide} setSlide={setSlide} message='Jag vet inte varför jag gör det här, jag har så tråååkiiiiiiigt'/>
+      : slide === 3 ? <Quiz3 slide={slide} setSlide={setSlide} />
+      : slide === 4 ? <Quiz4 slide={slide} setSlide={setSlide} />
+      : slide === 5 ? <Quiz2 slide={slide} setSlide={setSlide} />
       : <div>
         <TypeAnimation sequence={["Du klarade det, du har vunnit en resa till Paris!", 500, "Skojar bara, jag har gömt din present utanför din dörr i en Xtra påse", 500]} speed={50} cursor={false} wrapper="h1" repeat={0} style={{ fontSize: "2rem" }}/>
         <h2>Grattis i efterskott!</h2>
@@ -81,7 +81,7 @@ function ShowMessageSlide({message, setSlide, slide}: {message: string, setSlide
   )
 }
 
-function Quiz1({setSlide}: {setSlide: (slide: number) => void}) {
+function Quiz1({setSlide, slide}: {setSlide: (slide: number) => void, slide: number}) {
   // Your code for Quiz1 goes here
 
   return (
@@ -107,7 +107,7 @@ function Quiz1({setSlide}: {setSlide: (slide: number) => void}) {
             toast.error('Du måste välja minst en present');
           }
           else{
-            setSlide(1);
+            setSlide(slide + 1);
           }
         }}>
           Skicka
@@ -117,16 +117,38 @@ function Quiz1({setSlide}: {setSlide: (slide: number) => void}) {
   )
 }
 
-function Quiz2({setSlide}: {setSlide: (slide: number) => void}) {
+function Quiz2({setSlide, slide}: {setSlide: (slide: number) => void, slide: number}) {
 
-  setTimeout(() => {
-    setSlide(3);
-  }, 5000);
+  const [showNextSlide, setShowNextSlide] = useState(false);
+
+  
 
   return (
     <div>
-      <h1>Jag har gömt din present någonstans i Hovden. Tro mig, det är värt det.<br></br>Här är en bild på din present:</h1>
-      <img src='https://images.pexels.com/videos/6923433/pexels-photo-6923433.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'/>
+      {
+      !showNextSlide ? 
+      <div>
+        <h2>hihihi</h2>
+        <img src='https://i.imgflip.com/2bc010.jpg' />
+        <button onClick={() => {
+          setShowNextSlide(true);
+        }}>
+          Nästa
+        </button>
+      </div> 
+      : 
+      <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+      }}>
+        <img src='../images/image.png'/>
+        <button onClick={() => {
+          setSlide(slide + 1);
+        }}>
+          Nästa
+          </button>
+      </div>
+      }
     </div>
   )
 }
@@ -163,7 +185,7 @@ Quand la Tour Eiffel a-t-elle été construite ?
   )
 }
 
-function Quiz4({setSlide}: {setSlide: (slide: number) => void}) {
+function Quiz4({setSlide, slide}: {setSlide: (slide: number) => void, slide: number}) {
   return(
     <div>
       <h2>Vad betyder Hyppytyynytyydytys på svenska?</h2>
@@ -172,7 +194,7 @@ function Quiz4({setSlide}: {setSlide: (slide: number) => void}) {
         const input = document.getElementById('answerinput') as HTMLInputElement;
         const answer: string = 'Hoppande kudde tillfredsställelse'
         if (input.value.toLowerCase() === answer.toLowerCase()) {
-          setSlide(6);
+          setSlide(slide + 1);
         }
         else{
           toast.error('Faux');
